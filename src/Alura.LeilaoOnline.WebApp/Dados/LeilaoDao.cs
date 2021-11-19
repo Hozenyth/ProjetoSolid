@@ -18,20 +18,31 @@ namespace Alura.LeilaoOnline.WebApp.Dados
         }
 
 
-        public IEnumerable<Categoria> BuscarCategorias()// Vai trazer uma lista de categorias, recupera lista
+        public Leilao BuscarLeilaoPorId(int id)
         {
-            return _context.Categorias.ToList();
+            return _context.Leiloes.Find(id);
         }
 
-        public IEnumerable<Leilao> BuscarLeiloes()
+        public IEnumerable<Leilao> BuscarTodosLeiloes() => _context.Leiloes.Include(l => l.Categoria);
+
+        public IEnumerable<Categoria> BuscarTodasCategorias() => _context.Categorias;
+
+        public void IncluirLeilao(Leilao obj)
         {
-            return _context.Leiloes
-                .Include(l => l.Categoria)
-                .ToList();
+            _context.Leiloes.Add(obj);
+            _context.SaveChanges();
         }
-        public Leilao BuscarPorId(int id)
+
+        public void AlterarLeilao(Leilao obj)
         {
-            return _context.Leiloes.First(l => l.Id == id);
+            _context.Leiloes.Update(obj);
+            _context.SaveChanges();
+        }
+
+        public void ExcluirLeilao(Leilao leilao)
+        {
+            _context.Leiloes.Remove(leilao);
+            _context.SaveChanges();
         }
     }
 }
