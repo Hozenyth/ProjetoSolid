@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 
 
 
-namespace Alura.LeilaoOnline.WebApp.Dados
+namespace Alura.LeilaoOnline.WebApp.Dados.EfCore
 {
-    public class LeilaoDao // classe resposavel de acesso aos objetos(responsável por manter as operações) 
+    public class LeilaoDaoComEfCore : ILeilaoDao   // classe resposavel de acesso aos objetos(responsável por manter as operações) 
    
     {
         AppDbContext _context;
 
-        public LeilaoDao()
+        public LeilaoDaoComEfCore()
         {
             _context = new AppDbContext();
         }
