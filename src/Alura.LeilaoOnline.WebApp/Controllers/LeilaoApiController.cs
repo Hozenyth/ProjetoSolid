@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Alura.LeilaoOnline.WebApp.Models;
 using Alura.LeilaoOnline.WebApp.Dados;
-using Alura.LeilaoOnline.WebApp.Dados.EfCore;
 using System;
 
 namespace Alura.LeilaoOnline.WebApp.Controllers
@@ -11,13 +10,14 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
     [Route("/api/leiloes")]
     public class LeilaoApiController : ControllerBase
     {
-        AppDbContext _context;
+       
         ILeilaoDao _dao;
 
-        public LeilaoApiController()
+        public LeilaoApiController(ILeilaoDao dao)
         {
-            _context = new AppDbContext();
-            _dao = new LeilaoDaoComEfCore();
+            
+            
+            _dao = dao; // Retira a dependencia do Entity/namespace
         }
 
         [HttpGet]
